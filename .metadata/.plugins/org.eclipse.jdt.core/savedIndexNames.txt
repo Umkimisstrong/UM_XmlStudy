@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\XmlStudy\.metadata\.plugins\org.eclipse.jdt.core
+2722504765.index
+1279803665.index
+3577811115.index

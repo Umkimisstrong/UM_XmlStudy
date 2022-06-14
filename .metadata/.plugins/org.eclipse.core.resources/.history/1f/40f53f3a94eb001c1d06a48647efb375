@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DTD 추가 -->
+<!DOCTYPE memberList
+[
+<!ELEMENT memberList (memberInfo+)>
+<!ELEMENT memberInfo (name, tel, email, curriculumn, hobby, zipcode)>
+]>
+
+<memberList>
+	<memberInfo mid="1">
+		<name>김상기</name>
+		<tel><![CDATA[010-5693-4223]]></tel>
+		<email><![CDATA[ckacl0233@naver.com]]></email>
+		<curriculumn>
+			<sub>JAVA SE</sub>
+			<sub>ORACLE</sub>
+			<sub><![CDATA[Servlet&JSP]]></sub>
+		</curriculumn>
+		<hobby>talking</hobby>
+		<zipCode>01234</zipCode>
+	</memberInfo>
+	
+	<memberInfo mid="2">
+		<name>김민성</name>
+		<tel><![CDATA[010-5693-4223]]></tel>
+		<email><![CDATA[ckacl0233@naver.com]]></email>
+		<curriculumn>
+			<sub>JAVA SE</sub>
+			<sub>ORACLE</sub>
+			<sub><![CDATA[Servlet&JSP]]></sub>
+		</curriculumn>
+		<hobby>talking</hobby>
+		<zipCode>01234</zipCode>
+	</memberInfo>
+</memberList>
