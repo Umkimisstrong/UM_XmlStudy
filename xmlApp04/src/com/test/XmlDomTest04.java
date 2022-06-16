@@ -67,6 +67,27 @@ public class XmlDomTest04
 							, getText(vehicleElement, "YEAR")
 							, getText(vehicleElement, "STYLE")
 							, getText(vehicleElement, "PRICE"));
+					System.out.println("OPTIONS -----------------------------------------------------------------------");
+					
+					NodeList optionsNodeList = vehicleElement.getElementsByTagName("OPTIONS");
+					
+					if (optionsNodeList.getLength() > 0)
+					{
+						Node optionNode = optionsNodeList.item(0);
+						Element optionElement = (Element)optionNode;
+						
+						NodeList optionNodeList = optionElement.getChildNodes();
+						for (int j = 0; j < optionNodeList.getLength(); j++)
+						{
+							Node otnode = optionNodeList.item(j);
+							if (otnode.getNodeType() ==1 )
+							{
+								Element otElement = (Element)otnode;
+								System.out.printf("%s : %s %n",otElement.getTagName(), otElement.getTextContent());
+							}
+						}
+					}
+					
 			}
 			
 			
