@@ -1,11 +1,68 @@
+<%@page import="com.test.WeatherDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.test.WeatherDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
+%>
+<%
+	String stnId = request.getParameter("stnId");
+
+	if(stnId==null)
+		stnId="108";
+	
+	StringBuffer sb = new StringBuffer();
+	WeatherDAO dao = new WeatherDAO(stnId);
+	
+	// 타이틀
+	String title = dao.weatherTitle();
+	
+	// 육상 중기 예보
+	String weatherInfo = dao.weatherInfo();
+	
+	// 도시 리스트
+	ArrayList<String> cityList = dao.weatherCityList();
+	
+	//ArrayList<WeatherDTO> weatherList = dao.weatherList(idx);
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기상청 중기예보</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" href="https://">
+<title>기상청 육상 중기예보(WeatherInfo.jsp)</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function()
+	{
+		//alert("1");
+		
+		// 선택한 라디오 버튼의 상태를 선택된 상태(checked)로 유지할 수 있도록 처리
+		//$(":radio:eq(0)").attr("checked", "checked");
+		
+		//$(":radio:eq(2)").attr("checked", "checked");
+		
+		//$(":radio:eq(9)").attr("checked", "checked");
+		//$(":radio[value='108']").attr("checked", "checked");
+		//$(":radio[value='146']").attr("checked", "checked");
+		//$(":radio[value='184']").attr("checked", "checked");
+		$(":radio[value='<%=stnId %>']").attr("checked", "checked");
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	})
+	
+</script>
 </head>
 <body>
 
@@ -33,8 +90,10 @@ stnId=159	경남
 		<div class="panel panel-default" role="group">
 			<div class="panel-heading">지역 선택</div>
 			<div class="panel-body">
+			
+				<!-- 액션 속성 생략 => 수신처는 자기자신  -->
 				<form action="" method="get" role="form">
-					<input type="radio" name="stnId" value="108" checked="checked" />전국
+					<input type="radio" name="stnId" value="108" />전국
 					<input type="radio" name="stnId" value="109" />서울, 경기
 					<input type="radio" name="stnId" value="105" />강원
 					<input type="radio" name="stnId" value="131" />충북
@@ -49,9 +108,66 @@ stnId=159	경남
 				</form>
 			</div><!-- close.panel-body -->
 		
-		</div><!-- close.panel-heading -->
+		</div><!-- close.panel-default -->
+		
+		
+		<div class="panel panel-default" role="group">
+			<div class="panel-body">
+				<p>
+					<!-- <b>전국 육상 중기예보 - 2022년 06월 16일 (목)요일 06:00 발표</b> -->
+					<b><%=title %></b>
+				</p>
+				<p>
+				<!-- ○ (강수) 21일(화) 오후~22일(수) 오전 제주도에 비가 오겠습니다.<br />
+				○ (기온) 아침 기온은 19~23도, 낮 기온은 25~33도로 어제(15일, 아침최저기온 15~17도, 낮최고기온 18~27도)보다 높겠습니다. <br />
+				○ (주말전망) 18일(토)~19일(일)은 전국이 구름많겠습니다. 아침 기온은 19~23도, 낮 기온은 26~33도가 되겠습니다.<br /><br />
+				
+				* 20일(월) 이후 우리나라 주변의 기압계 변화에 따라 강수 시점과 지역의 변동성이 매우 크겠으니, 앞으로 발표되는 예보와 기상정보를 참고하기 바랍니다. -->
+				<%=weatherInfo %>
+				</p>
+				
+			<h3>서울</h3>	
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>날짜</th>
+						<th>날씨</th>
+						<th>최저/최고 기온</th>
+						<th>강수확률</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>2022-06-19 12:00</td>
+						<td>구름많음</td>
+						<td>21 ~ 29</td>
+						<td>40</td>
+					</tr>
+					<tr>
+						<td>2022-06-19 00:00</td>
+						<td>흐림</td>
+						<td>21 ~ 29</td>
+						<td>20</td>
+					</tr>
+					<tr>
+						<td>2022-06-20 00:00</td>
+						<td>흐림</td>
+						<td>22 ~ 30</td>
+						<td>40</td>
+					</tr>
+					<tr>
+						<td>2022-06-20 12:00</td>
+						<td>구름많음</td>
+						<td>22 ~ 30</td>
+						<td>30</td>
+					</tr>
+				</tbody>
+			</table>	
+			
+			</div>
+		</div>
 	</div>
-	
 </div>
 
 </body>
